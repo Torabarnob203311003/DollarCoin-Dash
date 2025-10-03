@@ -42,7 +42,7 @@ const Sidebar = () => {
         >
           <FaIcons.FaSignOutAlt className="mr-3" /> Logout
         </button>
-        <div className="pt-4 text-xs text-gray-400">© 2024 DollarCoin</div>
+        <div className="pt-4 text-xs text-gray-400">© 2025 DollarCoin</div>
       </div>
     </aside>
   );

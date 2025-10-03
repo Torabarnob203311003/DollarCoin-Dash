@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaEye } from 'react-icons/fa'
+import View from './View'
 
 // Dummy users data (at least 20 for pagination demo)
 const users = [
@@ -30,9 +31,17 @@ const USERS_PER_PAGE = 8;
 function UserManagementPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  // Set status based on role: Admin = Approved, Client = Pending
+  const usersWithStatus = users.map(u => ({
+    ...u,
+    status: u.role === 'Admin' ? 'Approved' : 'Pending',
+    details: `KYC details for ${u.name}. Address: 123 Main St, City. ID: #${u.id}...`
+  }));
 
   // Filter users by name or email
-  const filteredUsers = users.filter(
+  const filteredUsers = usersWithStatus.filter(
     user =>
       user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.email.toLowerCase().includes(search.toLowerCase())
@@ -66,7 +75,7 @@ function UserManagementPage() {
             <tr>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Name</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Role</th>
+              <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Status</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">View</th>
             </tr>
           </thead>
@@ -76,12 +85,15 @@ function UserManagementPage() {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-semibold">{user.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.role === 'Admin' ? 'bg-green-700 text-green-200' : 'bg-blue-700 text-blue-200'}`}>
-                    {user.role}
+                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.status === 'Approved' ? 'bg-green-700 text-green-200' : 'bg-yellow-700 text-yellow-200'}`}>
+                    {user.status}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <button className="flex items-center gap-2 text-green-400 hover:text-green-200 font-semibold px-3 py-1 rounded-lg bg-green-900/30 hover:bg-green-800/40 transition">
+                  <button
+                    className="flex items-center gap-2 text-green-400 hover:text-green-200 font-semibold px-3 py-1 rounded-lg bg-green-900/30 hover:bg-green-800/40 transition"
+                    onClick={() => setSelectedUser(user)}
+                  >
                     View <FaEye />
                   </button>
                 </td>
@@ -117,6 +129,10 @@ function UserManagementPage() {
           Next
         </button>
       </div>
+      {/* View Modal */}
+      {selectedUser && (
+        <View user={selectedUser} onClose={() => setSelectedUser(null)} />
+      )}
     </div>
   )
 }
