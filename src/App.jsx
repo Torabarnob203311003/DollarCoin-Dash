@@ -1,10 +1,10 @@
 // src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPageRouter from './components/LoginPage';
-import DashboardLayout from './components/DashboardLayout';
-import UserManagementPage from './components/UserManagementPage';
-import DashboardOverview from './components/DashboardOverview';
+import LoginPageRouter from './Components/LoginPage.jsx';
+import DashboardLayout from './Components/DashboardLayout.jsx';
+import UserManagementPage from './Components/UserManagementPage.jsx';
+import DashboardOverview from './Components/DashboardOverview.jsx';
 
 // Placeholder for other dashboard pages
 const SettingsPage = () => <div className="text-white text-xl">Settings Page under construction. ⚙️</div>;
