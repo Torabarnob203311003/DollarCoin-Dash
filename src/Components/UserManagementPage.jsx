@@ -4,26 +4,26 @@ import View from './View'
 
 // Dummy users data (at least 20 for pagination demo)
 const users = [
-  { id: 1, name: 'Alice Smith', email: 'alice@example.com', role: 'Admin' },
-  { id: 2, name: 'Bob Johnson', email: 'bob@example.com', role: 'Client' },
-  { id: 3, name: 'Charlie Lee', email: 'charlie@example.com', role: 'Client' },
-  { id: 4, name: 'David Brown', email: 'david@example.com', role: 'Client' },
-  { id: 5, name: 'Eva Green', email: 'eva@example.com', role: 'Admin' },
-  { id: 6, name: 'Frank White', email: 'frank@example.com', role: 'Client' },
-  { id: 7, name: 'Grace Black', email: 'grace@example.com', role: 'Client' },
-  { id: 8, name: 'Henry Blue', email: 'henry@example.com', role: 'Client' },
-  { id: 9, name: 'Ivy Red', email: 'ivy@example.com', role: 'Admin' },
-  { id: 10, name: 'Jack Orange', email: 'jack@example.com', role: 'Client' },
-  { id: 11, name: 'Karen Purple', email: 'karen@example.com', role: 'Client' },
-  { id: 12, name: 'Leo Silver', email: 'leo@example.com', role: 'Client' },
-  { id: 13, name: 'Mona Gold', email: 'mona@example.com', role: 'Admin' },
-  { id: 14, name: 'Nina Pink', email: 'nina@example.com', role: 'Client' },
-  { id: 15, name: 'Oscar Gray', email: 'oscar@example.com', role: 'Client' },
-  { id: 16, name: 'Paul Cyan', email: 'paul@example.com', role: 'Client' },
-  { id: 17, name: 'Quinn Lime', email: 'quinn@example.com', role: 'Admin' },
-  { id: 18, name: 'Rita Teal', email: 'rita@example.com', role: 'Client' },
-  { id: 19, name: 'Sam Amber', email: 'sam@example.com', role: 'Client' },
-  { id: 20, name: 'Tina Violet', email: 'tina@example.com', role: 'Client' },
+  { id: 1, name: 'Alice Smith', email: 'alice@example.com', role: 'Individual', userType: 'Admin' },
+  { id: 2, name: 'Bob Johnson', email: 'bob@example.com', role: 'Business', userType: 'Client' },
+  { id: 3, name: 'Charlie Lee', email: 'charlie@example.com', role: 'Individual', userType: 'Client' },
+  { id: 4, name: 'David Brown', email: 'david@example.com', role: 'Business', userType: 'Client' },
+  { id: 5, name: 'Eva Green', email: 'eva@example.com', role: 'Individual', userType: 'Admin' },
+  { id: 6, name: 'Frank White', email: 'frank@example.com', role: 'Business', userType: 'Client' },
+  { id: 7, name: 'Grace Black', email: 'grace@example.com', role: 'Individual', userType: 'Client' },
+  { id: 8, name: 'Henry Blue', email: 'henry@example.com', role: 'Business', userType: 'Client' },
+  { id: 9, name: 'Ivy Red', email: 'ivy@example.com', role: 'Individual', userType: 'Admin' },
+  { id: 10, name: 'Jack Orange', email: 'jack@example.com', role: 'Business', userType: 'Client' },
+  { id: 11, name: 'Karen Purple', email: 'karen@example.com', role: 'Individual', userType: 'Client' },
+  { id: 12, name: 'Leo Silver', email: 'leo@example.com', role: 'Business', userType: 'Client' },
+  { id: 13, name: 'Mona Gold', email: 'mona@example.com', role: 'Individual', userType: 'Admin' },
+  { id: 14, name: 'Nina Pink', email: 'nina@example.com', role: 'Business', userType: 'Client' },
+  { id: 15, name: 'Oscar Gray', email: 'oscar@example.com', role: 'Individual', userType: 'Client' },
+  { id: 16, name: 'Paul Cyan', email: 'paul@example.com', role: 'Business', userType: 'Client' },
+  { id: 17, name: 'Quinn Lime', email: 'quinn@example.com', role: 'Individual', userType: 'Admin' },
+  { id: 18, name: 'Rita Teal', email: 'rita@example.com', role: 'Business', userType: 'Client' },
+  { id: 19, name: 'Sam Amber', email: 'sam@example.com', role: 'Individual', userType: 'Client' },
+  { id: 20, name: 'Tina Violet', email: 'tina@example.com', role: 'Business', userType: 'Client' },
 ];
 
 const USERS_PER_PAGE = 8;
@@ -33,10 +33,10 @@ function UserManagementPage() {
   const [search, setSearch] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // Set status based on role: Admin = Approved, Client = Pending
+  // Set status based on userType: Admin = Approved, Client = Pending
   const usersWithStatus = users.map(u => ({
     ...u,
-    status: u.role === 'Admin' ? 'Approved' : 'Pending',
+    status: u.userType === 'Admin' ? 'Approved' : 'Pending',
     details: `KYC details for ${u.name}. Address: 123 Main St, City. ID: #${u.id}...`
   }));
 
@@ -75,6 +75,7 @@ function UserManagementPage() {
             <tr>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Name</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Email</th>
+              <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Role</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">Status</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider">View</th>
             </tr>
@@ -84,6 +85,11 @@ function UserManagementPage() {
               <tr key={user.id} className="hover:bg-green-900/20 transition">
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-semibold">{user.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.role === 'Individual' ? 'bg-blue-700 text-blue-200' : 'bg-purple-700 text-purple-200'}`}>
+                    {user.role}
+                  </span>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.status === 'Approved' ? 'bg-green-700 text-green-200' : 'bg-yellow-700 text-yellow-200'}`}>
                     {user.status}
@@ -101,7 +107,7 @@ function UserManagementPage() {
             ))}
             {currentUsers.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-6 py-4 text-center text-gray-400">
+                <td colSpan={5} className="px-6 py-4 text-center text-gray-400">
                   No users found.
                 </td>
               </tr>
