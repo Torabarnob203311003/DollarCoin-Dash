@@ -1,10 +1,12 @@
 // src/App.jsx
-import React, { useState } from 'react';
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPageRouter from './Components/LoginPage.jsx';
 import DashboardLayout from './Components/DashboardLayout.jsx';
 import UserManagementPage from './Components/UserManagementPage.jsx';
 import DashboardOverview from './Components/DashboardOverview.jsx';
+import { Toaster } from 'react-hot-toast';
+import AdMinPrivate from './private/Private.jsx';
 
 // Placeholder for other dashboard pages
 const SettingsPage = () => <div className="text-white text-xl">Settings Page under construction. ⚙️</div>;
@@ -21,29 +23,30 @@ const ProtectedRoute = ({ children, isAuthenticated }) => {
 };
 
 export default function App() {
-  // Simple state to simulate user authentication status
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Set to 'true' to easily view the dashboard
+
 
   return (
     <BrowserRouter>
       <Routes>
         {/* --- Public/Authentication Routes --- */}
-        
+
         {/* If the user hits the root, redirect to /login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
-        
+
         {/* Login, Forgot, Reset all use the same component logic */}
         <Route path="/login" element={<LoginPageRouter />} />
         <Route path="/forgot-password" element={<LoginPageRouter />} />
         <Route path="/reset-password" element={<LoginPageRouter />} />
 
         {/* --- Protected Dashboard Routes --- */}
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <AdMinPrivate>
               <DashboardLayout />
-            </ProtectedRoute>
+            </AdMinPrivate>
+
+
           }
         >
           <Route index element={<DashboardOverview />} />
@@ -51,9 +54,11 @@ export default function App() {
           <Route path="settings" element={<SettingsPage />} />
           <Route path="*" element={<DashboardOverviewFallback />} />
         </Route>
-        
+
         {/* --- 404 Catch-all --- */}
         <Route path="*" element={<div className="min-h-screen bg-gray-900 text-white flex items-center justify-center text-4xl">404 | Page Not Found</div>} />
+
+
       </Routes>
     </BrowserRouter>
   );

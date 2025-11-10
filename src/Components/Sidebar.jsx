@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
-import logo from '../assets/Footer.svg'; // Adjust path if needed
+
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    // Add your logout logic here
+    localStorage.removeItem("authToken")
     navigate('/login');
   };
 

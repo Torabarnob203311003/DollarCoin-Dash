@@ -155,6 +155,7 @@ const View = ({ user, onClose }) => {
   if (!user) return null;
 
   // Toast auto-hide
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   React.useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => setToast(null), 2000);
