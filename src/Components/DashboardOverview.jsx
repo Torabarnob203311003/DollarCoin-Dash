@@ -94,7 +94,7 @@ export default function DashboardOverview() {
           throw new Error('Authentication token not found. Please log in again.');
         }
 
-        const response = await fetch('https://neighbor-sleeping-information-duck.trycloudflare.com/api/v1/admin/dashboard/stats', {
+        const response = await fetch('https://fairly-distributions-enquiry-announcement.trycloudflare.com/api/v1/admin/dashboard/stats', {
           method: 'GET',
           headers: {
             'Authorization': `${authToken}`,

@@ -49,8 +49,8 @@ export default function App() {
 
           }
         >
-          <Route index element={<DashboardOverview />} />
-          <Route path="users" element={<UserManagementPage />} />
+          <Route index element={<AdMinPrivate><DashboardOverview /></AdMinPrivate>} />
+          <Route path="users" element={<AdMinPrivate><UserManagementPage /></AdMinPrivate>} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="*" element={<DashboardOverviewFallback />} />
         </Route>
