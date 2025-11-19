@@ -34,7 +34,7 @@ function LoginForm() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://fairly-distributions-enquiry-announcement.trycloudflare.com/api/v1/admin/login', {
+      const response = await fetch('https://overcontritely-epagogic-vicky.ngrok-free.dev/api/v1/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ function ForgotPasswordForm() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://fairly-distributions-enquiry-announcement.trycloudflare.com/api/v1/admin/forgot-password', {
+      const response = await fetch('https://overcontritely-epagogic-vicky.ngrok-free.dev/api/v1/admin/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -241,7 +241,7 @@ function OTPResetForm() {
   const [formData, setFormData] = useState({
     otp: '',
     newPassword: ''
-  
+
   });
   const [loading, setLoading] = useState(false);
 
@@ -273,7 +273,7 @@ function OTPResetForm() {
     const resetToast = toast.loading('Resetting password...');
 
     try {
-      const response = await fetch('https://fairly-distributions-enquiry-announcement.trycloudflare.com/api/v1/admin/reset-password', {
+      const response = await fetch('https://overcontritely-epagogic-vicky.ngrok-free.dev/api/v1/admin/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -330,10 +330,14 @@ const View = ({ user, onClose, baseUrl }) => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          reason: action === 'reject' ? 'Application rejected by admin' : undefined,
+        })
       });
-
+      console.log(response)
       if (response.ok) {
         const result = await response.json();
+        
         setToast({
           type: action === 'approve' ? 'success' : 'error',
           message: result.message || (action === 'approve' ? 'Application approved!' : 'Application rejected!')

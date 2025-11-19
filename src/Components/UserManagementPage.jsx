@@ -3,7 +3,7 @@ import { FaEye, FaSpinner } from 'react-icons/fa'
 import View from './View'
 
 const USERS_PER_PAGE = 8;
-const API_BASE_URL = 'https://fairly-distributions-enquiry-announcement.trycloudflare.com';
+const API_BASE_URL = 'https://overcontritely-epagogic-vicky.ngrok-free.dev';
 const API_URL = `${API_BASE_URL}/api/v1/admin/applications`;
 
 function UserManagementPage() {
@@ -28,10 +28,12 @@ function UserManagementPage() {
 
         const response = await fetch(API_URL, {
           method: 'GET',
-          headers: {
+          headers: new Headers({
+            "ngrok-skip-browser-warning": "true",
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
-          },
+          })
+         
         });
 
         if (!response.ok) {
@@ -155,8 +157,8 @@ function UserManagementPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.status === 'Approved' ? 'bg-green-700 text-green-200' :
-                      user.status === 'Rejected' ? 'bg-red-700 text-red-200' :
-                        'bg-yellow-700 text-yellow-200'
+                    user.status === 'Rejected' ? 'bg-red-700 text-red-200' :
+                      'bg-yellow-700 text-yellow-200'
                     }`}>
                     {user.status}
                   </span>
